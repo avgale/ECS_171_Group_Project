@@ -1,30 +1,39 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from sklearn.naive_bayes   import GaussianNB
-from sklearn.metrics       import classification_report, confusion_matrix, accuracy_score
+from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 
-#Load dataset filtered_data.csv
-df = pd.read_csv('/Users/danielchu/Downloads/filtered_data.csv')
+#Load data
+df = pd.read_csv('filtered_data.csv')
 
-#define target + features
+#Choose your feature(s)
+#Try: kidney disease
+features = ['moderate.to.severe.chronic.kidney.disease']
+
+#can also include acute renal failure by doing:
+#features = ['moderate.to.severe.chronic.kidney.disease','acute.renal.failure',] (JUST ADD THE VARIABLES!!)
+
+X = df[features]
+
+#Target death 
 y = df['death']
-X = df.drop('death', axis=1)
 
-#split into train & test sets
+#TRAIN + TEST
+
+#Split
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
+    X, y, test_size=0.2, random_state=42, stratify=y
 )
 
-#train the Gaussain Naïve Bayes algorithm
+#Fit a Naïve Bayes classifier
 model = GaussianNB()
 model.fit(X_train, y_train)
 
-#predict on test set
+#PREDICT + EVALUATE
 y_pred = model.predict(X_test)
 
-#evaluate performance
-print(f"Accuracy: {accuracy_score(y_test, y_pred):.2f}\n")
-print("Classification Report:")
-print(classification_report(y_test, y_pred, target_names=['Survived','Died']))
-print("Confusion Matrix:")
-print(confusion_matrix(y_test, y_pred))
+print("Accuracy:", accuracy_score(y_test, y_pred))
+print(classification_report(
+    y_test, y_pred, target_names=['Survived', 'Died']
+))
+print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
