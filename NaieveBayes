@@ -1,0 +1,43 @@
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import (accuracy_score, precision_score, f1_score, classification_report, confusion_matrix)
+import matplotlib.pyplot as plt
+
+#Load filtered_data 
+df = pd.read_csv('filtered_data.csv')
+
+#Select features & target
+features = ['moderate.to.severe.chronic.kidney.disease','acute.renal.failure','creatinine.enzymatic.method']
+#can add as many features as you want based off of the filtered data
+X = df[features]
+y = df['death']
+
+#Split
+X_train, X_test, y_train, y_test = train_test_split( X, y, test_size=0.2, random_state=42, stratify=y)
+
+#Train
+model = GaussianNB()
+model.fit(X_train, y_train)
+
+#Predict & print text metrics
+y_pred = model.predict(X_test)
+print("Accuracy:", accuracy_score(y_test, y_pred))
+print(classification_report(y_test, y_pred, target_names=['Survived','Died']))
+print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
+
+#Compute individual scores for plotting
+accuracy  = accuracy_score(y_test, y_pred)
+precision = precision_score(y_test, y_pred)
+f1_macro  = f1_score(y_test, y_pred, average='macro')
+
+#Plot historgram
+metrics = ['Accuracy', 'Precision', 'F1 Macro Score']
+scores  = [accuracy, precision, f1_macro]
+
+plt.figure()
+plt.bar(metrics, scores)
+plt.ylim(0, 1)
+plt.title('Evaluation Model')
+plt.ylabel('Score')
+plt.show()
