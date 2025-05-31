@@ -2,16 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Machine Learning Classification Project</title>
+    <title>Mortality Prediction in Heart Failure Patients</title>
+
+    <!-- Normalize CSS for browser compatability -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,600&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
 </head>
 <body>
-    <h1>Machine Learning Classification Project</h1>
-    <p>Enter left ventricular ejection fraction (e.g. 55, represents a percent between 1-100) and creatinine levels (e.g. 60.2, represent umol/L) separated by a comma e.g. 55, 60.2</p>
-    <form method="POST" action="/predict">
-        <label for="input">Enter data to classify:</label>
-        <input type="text" name="input" id="input" required>
-        <br>
-        <button type="submit">Predict</button>
-    </form>
+    <main>
+        <h1>Mortality Prediction in Heart Failure Patients</h1>
+        <p>Enter left ventricular ejection fraction (e.g. 55, represents a percent between 1-100) and creatinine levels (e.g. 60.2, represent umol/L) separated by a comma e.g. 55, 60.2</p>
+        <form method="POST" action="/predict">
+            <div id="input">
+                <label for="input">Enter data to classify:</label>
+                <input type="text" name="input" id="input" required>
+            </div>
+            <br>
+            <button type="submit">Predict</button>
+        </form>
+    </main>
 </body>
 </html>

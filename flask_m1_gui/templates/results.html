@@ -3,14 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Results</title>
+
+    <!-- Normalize CSS for browser compatability -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,600&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div class="result-container">
-        <h1>Prediction Result</h1>
-        <div class="prediction">
-            {{ prediction }}
+    <main>
+        <div class="result-container">
+            <h1>Prediction Result</h1>
+            <p class="prediction">
+                {{ prediction }}
+            </p>
+            <p id="disclaimer"><strong id="note">Note</strong>: Predictions may not be accurate and patients should be assessed by a medical professional.</p>
+            <a href="/">Return to Home</a>
         </div>
-        <a href="/">Back</a>
-    </div>
+    </main>
 </body>
 </html>

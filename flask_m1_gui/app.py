@@ -1,7 +1,7 @@
 
 import pandas as pd
 from flask import Flask, render_template, request
-from naive_bayes_model import BayesModel  # Replace with your machine learning model import
+from naive_bayes_model import BayesModel
 
 app = Flask(__name__)
 
@@ -27,9 +27,9 @@ def predict():
         predicted_class = prediction[0]
         outcome = ""
         if (predicted_class == 0):
-            outcome = "The patient is predicted to survive."
+            outcome = "The patient is predicted to survive the 6 months following heart failure."
         else:
-            outcome = "The patient is predicted to die within 6 months after heart failure."
+            outcome = "The patient is predicted to die within 6 months of the initial heart failure."
 
         return render_template("results.html", prediction=outcome)
 
