@@ -22,7 +22,7 @@ X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 
 # logistic regression classifier
-logisticModel = LogisticRegression()
+logisticModel = LogisticRegression(random_state=0)
 logisticModel.fit(X_train_scaled, y_train)
 y_pred1 = logisticModel.predict(X_test_scaled)
 accuracy = accuracy_score(y_test, y_pred1)
